@@ -19,7 +19,9 @@ import CartItem from './CartItem'
 export default function Cart(props) {
     const { quantity, order } = props
     const { isOpen, onOpen, onClose } = useDisclosure()
-    
+    const total = order.reduce((sum, el) => {
+        return sum + el.price.finalPrice * el.quantity
+    }, 0)
     return (
         <>
             <Box pos='fixed' zIndex='5' padding='0 40px 40px 40px' right='10px' display='flex' alignItems='end'>
@@ -27,7 +29,7 @@ export default function Cart(props) {
                 {quantity ? <Text>{quantity}</Text> : null}
             </Box>
 
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen} size={'lg'} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Корзина</ModalHeader>
@@ -39,11 +41,16 @@ export default function Cart(props) {
                             )) : <li>Корзина пуста</li>}
                         </ul>
                     </ModalBody>
-                    <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={onClose}>
-                            Close
+                    <ModalFooter display={'flex'} justifyContent='space-between' alignItems={'center'}>
+                        <Text>Итого: {total} USD</Text>
+                        <Box display={'flex'} justifyContent={'end'}>
+                        <Button bgColor='#1A263D' colorScheme='green' mr={3} onClick={onClose}>
+                            Оформить заказ
                         </Button>
-                        <Text></Text>
+                        <Button bgColor='#1A263D' colorScheme='red' mr={3} onClick={onClose}>
+                            Закрыть
+                        </Button>
+                        </Box>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

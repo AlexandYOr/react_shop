@@ -10,6 +10,7 @@ export default function Shop() {
     const [loading, setLoading] = useState(true)
     const [order, setOrder] = useState([])
     const addToCart = (item) => {
+        console.log(item)
         const addedItem = order.find(findingOrder => item.mainId === findingOrder.mainId)
         if (!addedItem) {
             const newItem = {
@@ -28,9 +29,8 @@ export default function Shop() {
                     quantity: orderItem.quantity + 1
                 }
             }
-            return item
+            return orderItem
         })
-        console.log(newOrder)
         setOrder(newOrder)
 
     }
