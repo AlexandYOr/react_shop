@@ -1,6 +1,3 @@
-import { Box, Text } from '@chakra-ui/react'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     Modal,
     ModalOverlay,
@@ -10,22 +7,17 @@ import {
     ModalBody,
     ModalCloseButton,
     Button,
-    useDisclosure
+    Text,
+    useDisclosure 
 } from '@chakra-ui/react'
 import CartItem from './CartItem'
 
-
-
-export default function Cart(props) {
-    const { quantity, order } = props
+export default function CartList(props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    
+    const {order = []} = props
     return (
         <>
-            <Box pos='fixed' zIndex='5' padding='0 40px 40px 40px' right='10px' display='flex' alignItems='end'>
-                <FontAwesomeIcon icon={faCartShopping} size='2xl' color='#1A263D' cursor='pointer' onClick={onOpen} />
-                {quantity ? <Text>{quantity}</Text> : null}
-            </Box>
+            <Button onClick={onOpen}>Open Modal</Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
@@ -35,7 +27,7 @@ export default function Cart(props) {
                     <ModalBody>
                         <ul>
                             {order.length ? order.map(item => (
-                                <CartItem key={item.mainId} {...item} />
+                                <CartItem key={item.mainId} {...item}/>
                             )) : <li>Корзина пуста</li>}
                         </ul>
                     </ModalBody>
@@ -49,5 +41,4 @@ export default function Cart(props) {
             </Modal>
         </>
     )
-
 }
