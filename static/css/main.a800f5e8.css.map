@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.a800f5e8.css","mappings":"AACA,KACE,wBAAyB,CACzB,YAAa,CACb,qBAAsB,CAGtB,QAAS,CAFT,6BAA8B,CAC9B,gBAEF","sources":["index.css"],"sourcesContent":["\n.app {\n  background-color: #F6F4FB;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  min-height: 100vh;\n  gap: 20px;\n}\n"],"names":[],"sourceRoot":""}
