@@ -9,8 +9,8 @@ export default function Shop() {
     const [goods, setGoods] = useState([])
     const [loading, setLoading] = useState(true)
     const [order, setOrder] = useState([])
+
     const addToCart = (item) => {
-        console.log(item)
         const addedItem = order.find(findingOrder => item.mainId === findingOrder.mainId)
         if (!addedItem) {
             const newItem = {
@@ -20,10 +20,9 @@ export default function Shop() {
             setOrder((prev) => [...prev, newItem])
             return
         }
-        
         const newOrder = order.map((orderItem) => {
             if (addedItem.mainId === orderItem.mainId) {
-                
+
                 return {
                     ...orderItem,
                     quantity: orderItem.quantity + 1
@@ -32,8 +31,42 @@ export default function Shop() {
             return orderItem
         })
         setOrder(newOrder)
-
     }
+
+    const removeFromCart = (itemId) => {
+        const newOrder = order.filter(el => el.mainId !== itemId)
+        setOrder(newOrder)
+    }
+
+    const decrementQuantity = (item) => {
+        const newQuantity = order.map((orderItem) => {
+
+            if (item === orderItem.mainId && orderItem.quantity > 1) {
+                    return {
+                        ...orderItem,
+                        quantity: orderItem.quantity - 1
+                    }
+            }
+            return orderItem
+        })   
+        setOrder(newQuantity)     
+    }
+
+    const incrementQuantity = (item) => {
+        const newQuantity = order.map((orderItem) => {
+
+            if (item === orderItem.mainId) {
+                    return {
+                        ...orderItem,
+                        quantity: orderItem.quantity + 1
+                    }
+            }
+            return orderItem
+        })   
+        setOrder(newQuantity)     
+    }
+
+    
 
     useEffect(function getGoods() {
         fetch(API_URL, {
@@ -50,7 +83,7 @@ export default function Shop() {
     }, [])
 
     return <Box as='main' className="container" bg='#F6F4FB'>
-        <Cart quantity={order.length} order={order} />
+        <Cart quantity={order.length} order={order} removeFromCart={removeFromCart} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity} />
         {loading ? <Preloader /> : <GoodsList goods={goods} addToCart={addToCart} />}
     </Box>
 }
