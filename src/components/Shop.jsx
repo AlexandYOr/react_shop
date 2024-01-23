@@ -38,7 +38,7 @@ export default function Shop() {
         setOrder(newOrder)
     }
 
-    const decrementQuantity = (item) => {
+    const decreaseQuantity = (item) => {
         const newQuantity = order.map((orderItem) => {
 
             if (item === orderItem.mainId && orderItem.quantity > 1) {
@@ -52,7 +52,7 @@ export default function Shop() {
         setOrder(newQuantity)     
     }
 
-    const incrementQuantity = (item) => {
+    const increaseQuantity = (item) => {
         const newQuantity = order.map((orderItem) => {
 
             if (item === orderItem.mainId) {
@@ -83,7 +83,7 @@ export default function Shop() {
     }, [])
 
     return <Box as='main' className="container" bg='#F6F4FB'>
-        <Cart quantity={order.length} order={order} removeFromCart={removeFromCart} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity} />
+        <Cart quantity={order.length} order={order} removeFromCart={removeFromCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} />
         {loading ? <Preloader /> : <GoodsList goods={goods} addToCart={addToCart} />}
     </Box>
 }

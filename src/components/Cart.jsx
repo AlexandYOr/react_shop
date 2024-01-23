@@ -17,7 +17,7 @@ import CartItem from './CartItem'
 
 
 export default function Cart(props) {
-    const { quantity, order, removeFromCart, decrementQuantity, incrementQuantity } = props
+    const { quantity, order, removeFromCart, decreaseQuantity, increaseQuantity } = props
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const total = order.reduce((sum, el) => {
@@ -38,7 +38,7 @@ export default function Cart(props) {
                     <ModalBody>
                         <ul>
                             {order.length ? order.map(item => (
-                                <CartItem removeFromCart={removeFromCart} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity} key={item.mainId} {...item} />
+                                <CartItem removeFromCart={removeFromCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} key={item.mainId} {...item} />
                             )) : <li>Корзина пуста</li>}
                         </ul>
                     </ModalBody>

@@ -7,8 +7,8 @@ export default function CartItem(props) {
         price,
         quantity,
         removeFromCart,
-        decrementQuantity,
-        incrementQuantity
+        decreaseQuantity,
+        increaseQuantity
     } = props
     return (
         <Box>
@@ -21,7 +21,7 @@ export default function CartItem(props) {
                             size={'xs'}
                             bgColor='#1A263D'
                             colorScheme='purple'
-                            onClick={() => decrementQuantity(mainId)}
+                            onClick={() => decreaseQuantity(mainId)}
                         >
                             -
                         </Button>
@@ -29,7 +29,7 @@ export default function CartItem(props) {
                         <Button size={'xs'}
                             bgColor='#1A263D'
                             colorScheme='purple'
-                            onClick={() => incrementQuantity(mainId)}
+                            onClick={() => increaseQuantity(mainId)}
                         >
                             +
                         </Button>

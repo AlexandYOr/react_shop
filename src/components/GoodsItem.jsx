@@ -1,21 +1,23 @@
-import { Card, 
-    CardBody, 
-    CardFooter, 
-    Text, 
-    Image, 
-    Stack, 
-    Divider, 
-    ButtonGroup, 
+import {
+    Card,
+    CardBody,
+    CardFooter,
+    Text,
+    Image,
+    Stack,
+    Divider,
+    ButtonGroup,
     Button,
     Heading,
- } from '@chakra-ui/react'
+    useToast,
+} from '@chakra-ui/react'
 
 export default function GoodsItem(props) {
     const {
         addToCart,
         item
     } = props
-
+    const toast = useToast()
     return (
         <Card maxW='sm'>
             <CardBody>
@@ -37,7 +39,19 @@ export default function GoodsItem(props) {
             <Divider />
             <CardFooter>
                 <ButtonGroup spacing='2'>
-                    <Button onClick={() => addToCart(item)} variant='ghost' colorScheme='blue'>
+                    <Button
+                        onClick={() => {
+                            addToCart(item)
+                            toast({
+                                position: 'top-right',
+                                description: "Товар успешно добавлен в корзину",
+                                status: "success",
+                                duration: "700",
+                                isClosable: "true"
+                            })
+                        }}
+                        variant='ghost'
+                        colorScheme='blue'>
                         Купить
                     </Button>
                 </ButtonGroup>
