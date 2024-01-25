@@ -1,4 +1,7 @@
 import { Button, Box, Divider } from '@chakra-ui/react'
+import { useContext } from 'react'
+import { ShopContext } from '../context'
+
 
 export default function CartItem(props) {
     const {
@@ -6,10 +9,10 @@ export default function CartItem(props) {
         displayName,
         price,
         quantity,
-        removeFromCart,
-        decreaseQuantity,
-        increaseQuantity
     } = props
+
+    const {removeFromCart, decreaseQuantity, increaseQuantity} = useContext(ShopContext)
+
     return (
         <Box>
             <Box bgColor='#F6F4FB' display='flex' justifyContent='space-between' alignItems='center'>

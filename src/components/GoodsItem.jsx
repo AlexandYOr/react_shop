@@ -1,3 +1,5 @@
+import {useContext} from 'react'
+import { ShopContext } from '../context'
 import {
     Card,
     CardBody,
@@ -14,10 +16,11 @@ import {
 
 export default function GoodsItem(props) {
     const {
-        addToCart,
         item
     } = props
     const toast = useToast()
+    const {addToCart} = useContext(ShopContext)
+
     return (
         <Card maxW='sm'>
             <CardBody>

@@ -1,8 +1,10 @@
+import {useContext} from 'react'
+import { ShopContext } from '../context'
 import { Stack } from '@chakra-ui/react';
 import GoodsItem from "./GoodsItem";
 
-export default function GoodsList (props) {
-    const {goods = [], addToCart} = props;
+export default function GoodsList () {
+    const {goods = []} = useContext(ShopContext);
     if (!goods.length) {
         return <h3>Пусто</h3>
     }
@@ -10,7 +12,7 @@ export default function GoodsList (props) {
     return (
         <Stack wrap='wrap' justifyContent='center' direction='row' spacing='24px'>
             {goods.map(item => (
-                <GoodsItem key={item.mainId} item={item} addToCart={addToCart}/>
+                <GoodsItem key={item.mainId} item={item}/>
             ))}
 </Stack>
     )

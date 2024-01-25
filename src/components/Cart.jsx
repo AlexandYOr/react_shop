@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { ShopContext } from '../context'
 import { Box, Text } from '@chakra-ui/react'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,10 +18,10 @@ import CartItem from './CartItem'
 
 
 
-export default function Cart(props) {
-    const { quantity, order, removeFromCart, decreaseQuantity, increaseQuantity } = props
+export default function Cart() {
     const { isOpen, onOpen, onClose } = useDisclosure()
-
+    const { order } = useContext(ShopContext)
+    const quantity = order.length
     const total = order.reduce((sum, el) => {
         return sum + el.price.finalPrice * el.quantity
     }, 0)
@@ -38,7 +40,7 @@ export default function Cart(props) {
                     <ModalBody>
                         <ul>
                             {order.length ? order.map(item => (
-                                <CartItem removeFromCart={removeFromCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} key={item.mainId} {...item} />
+                                <CartItem key={item.mainId} {...item} />
                             )) : <li>Корзина пуста</li>}
                         </ul>
                     </ModalBody>

@@ -3,16 +3,19 @@ import React from "react";
 import Header from './components/Header'
 import Footer from "./components/Footer"
 import Shop from "./components/Shop"
+import { ContextProvider } from "./context";
 
 function App() {
   return (
-      <ChakraProvider>
-        <div className="app">
-        <Header/>
-        <Shop/>
-        <Footer/>
-        </div>
-      </ChakraProvider>
+    <ChakraProvider>
+      <div className="app">
+        <Header />
+        <ContextProvider>
+          <Shop />
+        </ContextProvider>
+        <Footer />
+      </div>
+    </ChakraProvider>
   )
 
 }
